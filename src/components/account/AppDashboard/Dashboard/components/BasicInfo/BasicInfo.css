@@ -1,0 +1,36 @@
+.basic-info-container {
+    max-width: 600px;
+    margin: 50px auto; /* Center the container horizontally with some top margin */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+
+.basic-info-container p {
+    /* text-align: center; */
+    margin-bottom: 30px;
+}
+
+.basic-info-container form {
+    /* Add more spacing and align items to the left */
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.basic-info-container .form-group {
+    margin-bottom: 20px; /* Increase space between form groups */
+}
+
+.basic-info-container .form-control {
+    border: 1px solid #434343;
+    border-radius: 5px;
+    padding: 10px; /* Add padding to form controls */
+}
+
+.basic-info-container .btn-primary {
+    width: 100%; /* Make the button full width */
+    margin-top: 30px;
+}

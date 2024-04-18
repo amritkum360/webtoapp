@@ -1,0 +1,98 @@
+.pricing-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 5%;
+}
+
+.pricing-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: calc(33.33% - 40px); /* Adjust width for responsiveness */
+    max-width: 300px; /* Maximum width for each box */
+    margin-bottom: 20px;
+}
+
+.pricing-box h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    display: flex;
+}
+
+.cross-icon, .check-icon {
+    margin-right: 5px;
+}
+
+.get-started-btn {
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border: 0.5px solid black;
+}
+
+.popular_get{
+     background-color: #007bff;
+     /* background-color: #ffffff; */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.get-started-btn.blue {
+    background-color: #0056b3;
+}
+
+.get-started-btn:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.feature {
+    font-size: 16px;
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 992px) {
+    .pricing-box {
+        width: calc(50% - 40px); /* Two boxes per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-box {
+        width: calc(100% - 40px); /* One box per row */
+    }
+}

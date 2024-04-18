@@ -1,0 +1,48 @@
+.newapp-container {
+    background-color: #f0f0f0;
+    /* padding: 50px 0; */
+    height: 100vh;
+    display: flex;
+    /* align-items: center; */
+    
+    justify-content: center;
+}
+
+.newapp_form_cnt{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.newapp-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    height: fit-content;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.or-divider {
+    text-align: center;
+    margin: 5px 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.submit-btn {
+    width: 80%;
+    margin-top: 20px;
+}
+
+
+
+.newapp_btn_cnt{
+    display: flex;
+    justify-content: center;
+}
