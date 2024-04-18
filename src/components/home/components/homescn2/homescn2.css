@@ -1,0 +1,72 @@
+/* CSS */
+.container_home2 {
+    height: 95vh;
+    display: flex;
+    background-color: black;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.row_home2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 90%;
+}
+
+.content-box_home2 {
+    background-color: rgb(0, 0, 0);
+    padding: 20px;
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative; /* Add this to make positioning easier */
+}
+
+.content-box_home2 div {
+    flex: 1;
+}
+
+.content-box_home2 h2 {
+    margin-bottom: 10px;
+}
+
+.content-box_home2 img {
+    width: 200px; /* Adjust the width as needed */
+    height: auto;
+    margin-left: 20px; /* Add some space between the text and image */
+}
+
+.step {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    position: absolute; /* Position relative to the parent */
+    top: -20px; /* Adjust as needed */
+    left: -20px; /* Adjust as needed */
+    background-color: black; /* Match the background color */
+    padding: 5px 10px; /* Adjust as needed */
+    border: 1px solid white; /* Add border */
+    border-radius: 5px; /* Add border radius */
+}
+
+.content-box_home2 div {
+    flex: 1;
+    padding-left: 40px;
+}
+.content-box_home2 .step {
+    flex: 1;
+    padding: 5px 10px;
+    background: darkblue;
+}
+
+.content-box_home2 h2 {
+    margin-bottom: 10px;
+    color: yellow;
+}
+.content-box_home2 p {
+    color: white;
+}
+
