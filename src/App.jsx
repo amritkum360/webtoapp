@@ -8,6 +8,7 @@ import AppDashboard from "./components/account/AppDashboard/Dashboard/Dashboard"
 import MyApps from "./components/account/myapps/myapps";
 import NewApp from "./components/account/newapp/newapp";
 import Home from "./components/home/home";
+import Upgrade from "./components/account/Upgrade/Upgrade";
 
 export default function App() {
   const isAuthenticated = localStorage.getItem("token") !== null; // Check if a token exists in localStorage
@@ -68,6 +69,15 @@ export default function App() {
         <>
           <Navbar isAuthenticated={isAuthenticated} />
           <AppDashboard />
+        </>
+      ),
+    },
+    {
+      path: "/app/upgrade/:id",
+      element: (
+        <>
+          <Navbar isAuthenticated={isAuthenticated} />
+          <Upgrade />
         </>
       ),
     },

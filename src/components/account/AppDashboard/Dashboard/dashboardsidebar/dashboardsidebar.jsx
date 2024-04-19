@@ -1,4 +1,5 @@
 import React from 'react';
+import './dashboardsidebar.css'
 
 const DashboardSidebar = ({ activeItem, setActiveItem }) => {
     const handleClick = (item) => {
@@ -7,7 +8,7 @@ const DashboardSidebar = ({ activeItem, setActiveItem }) => {
 
     return (
         <div className="sidebar">
-            <ul className="list-group">
+            <ul className="list-group dashboard_sidebar">
                 <li className={`list-group-item ${activeItem === 'Dashboard' ? 'active' : ''}`} onClick={() => handleClick('Dashboard')}>
                     Dashboard
                 </li>

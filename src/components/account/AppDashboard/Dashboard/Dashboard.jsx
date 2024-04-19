@@ -14,10 +14,10 @@ const AppDashboard = () => {
     return (
         <div className="dashboard-container">
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-3">
                     <DashboardSidebar activeItem={activeItem} setActiveItem={setActiveItem} />
                 </div>
-                <div className="col-md-10">
+                <div className="col-md-9">
                     <div className="dashboard-content">
                         {activeItem === 'Dashboard' && <MainDashboard />}
                         {activeItem === 'Basic Info' && <BasicInfo />}

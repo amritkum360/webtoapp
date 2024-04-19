@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { jwtDecode } from 'jwt-decode'; // Correct import statement
-import { useNavigate } from 'react-router-dom'; // Import useHistory hook
+import { useNavigate, useParams } from 'react-router-dom'; // Import useHistory and useParams hooks
 import './newapp.css';
 
 export default function NewApp() {
@@ -24,6 +24,16 @@ export default function NewApp() {
             setFormData(prevData => ({
                 ...prevData,
                 user: Userid
+            }));
+        }
+
+        // Extract websiteurl parameter from URL and set it in state
+        const searchParams = new URLSearchParams(window.location.search);
+        const urlWebsiteUrl = searchParams.get('websiteurl');
+        if (urlWebsiteUrl) {
+            setFormData(prevData => ({
+                ...prevData,
+                website: urlWebsiteUrl
             }));
         }
     }, []); // Empty dependency array to run the effect only once on component mount
@@ -57,9 +67,9 @@ export default function NewApp() {
             console.log('Response from server:', data);
 
             // Extract the ID from the response data and navigate to the dashboard page
-            const  id  = data._id; // Assuming the ID is returned in the response data
-            
-            navigate(`/app/dashboard/${id}`);
+            const id = data._id; // Assuming the ID is returned in the response data
+            // navigate(`/app/dashboard/${id}`);
+            navigate(`/app/upgrade/${id}`);
 
         } catch (error) {
             console.error('Error submitting form:', error);

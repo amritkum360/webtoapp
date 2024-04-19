@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import './dasboard.css';
 
 const MainDashboard = () => {
+    const navigate = useNavigate()
     const { id } = useParams();
     const [appData, setAppData] = useState(null);
 
@@ -32,17 +33,23 @@ const MainDashboard = () => {
                     {appData && (
                         <Card className="app-card">
                             <Card.Body className="d-flex align-items-center">
-                                <div className="app-icon mr-md-4">
-                                    <Image src={appData.appicon} alt="App Icon" fluid style={{ maxWidth: '150px', maxHeight: '150px' }} />
-                                </div>
-                                <div>
-                                    <Card.Title>{appData.appName}</Card.Title>
-                                    <Card.Text>
-                                        <strong>Website:</strong> {appData.website}<br />
-                                        <strong>Created At:</strong> {new Date(appData.createdAt).toLocaleDateString()}
-                                    </Card.Text>
-                                </div>
-                            </Card.Body>
+    <div className="app-icon mr-md-4">
+        <Image className='app_dashboard' src={appData.appicon} alt="App Icon" fluid style={{ maxWidth: '150px', maxHeight: '150px' }} />
+    </div>
+    <div>
+        <div>
+        <div className="pro-tag">{appData.plan === "2000" || appData.plan === "1199" ? "Pro" : "Free"}</div>
+        {appData.plan !== "2000" && appData.plan !== "1199" && (
+            <button className='upgrade_btn' onClick={() => navigate(`/app/upgrade/${id}`)}>UPGRADE</button>
+        )}</div>
+        <Card.Title>{appData.appName}</Card.Title>
+        <Card.Text>
+            <strong>Website:</strong> {appData.website}<br />
+            <strong>Created At:</strong> {new Date(appData.createdAt).toLocaleDateString()}
+        </Card.Text>
+    </div>
+</Card.Body>
+
                         </Card>
                     )}
                 </div>

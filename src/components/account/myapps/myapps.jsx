@@ -60,13 +60,15 @@ const MyApps = () => {
                                     <Image src={app.appicon} alt={app.appName} fluid className="app-icon my_apps_image" />
                                 </Col>
                                 <Col xs={8}>
-                                    <Card.Body onClick={() => appdasboard(app._id)}>
-                                        <Card.Title>{app.appName}</Card.Title>
-                                        <Card.Text>
-                                            Website: {app.website}<br />
-                                            Created At: {new Date(app.createdAt).toLocaleDateString()}
-                                        </Card.Text>
-                                    </Card.Body>
+                                <Card.Body onClick={() => appdasboard(app._id)}>
+  <div className="pro-tag">{app.plan === "2000" || app.plan === "1199" ? "Pro" : "Free"}</div>
+  <Card.Title>{app.appName}</Card.Title>
+  <Card.Text>
+    Website: {app.website}<br />
+    Created At: {new Date(app.createdAt).toLocaleDateString()}
+  </Card.Text>
+</Card.Body>
+
                                 </Col>
                             </Row>
                         </Card>
