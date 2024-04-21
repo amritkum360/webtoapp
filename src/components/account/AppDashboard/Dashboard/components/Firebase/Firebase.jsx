@@ -29,6 +29,8 @@ const Firebase = () => {
         fetchFirebaseData();
     }, []);
 
+    
+    
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -37,23 +39,56 @@ const Firebase = () => {
         });
     };
 
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const fileData = event.target.result;
+            const blob = new Blob([fileData], { type: 'application/json' });
+            setFormData({
+                ...formData,
+                firebaseConfigFile: file,
+            });
+            
+        };
+        reader.readAsText(file);
+    };
+    
+
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const formDataToSend = {
+            const formDataToSend = new FormData();
+            formDataToSend.append('file', formData.firebaseConfigFile, 'config.json');
+            formDataToSend.append('upload_preset', 'qta1vcsh'); // Replace 'your_upload_preset' with your Cloudinary upload preset
+    
+            const cloudinaryResponse = await fetch('https://api.cloudinary.com/v1_1/dcmrsdzvq/raw/upload', {
+                method: 'POST',
+                body: formDataToSend,
+                // Set Content-Type to multipart/form-data
+            });
+    
+            if (!cloudinaryResponse.ok) {
+                throw new Error('Failed to upload file to Cloudinary');
+            }
+    
+            const cloudinaryData = await cloudinaryResponse.json();
+            const fileUrl = cloudinaryData.secure_url;
+    
+            const formDataToSendWithFileUrl = {
+                firebaseConfigFile: fileUrl,
                 fcmsecuritykey: formData.fcmServerKey,
             };
-
-            const formDataToSendString = JSON.stringify(formDataToSend);
-
+    
             const response = await fetch('http://127.0.0.1:3000/app/firebase', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: formDataToSendString,
+                body: JSON.stringify(formDataToSendWithFileUrl),
             });
-
+    
             if (response.ok) {
                 const data = await response.json();
                 console.log('Data updated successfully:', data);
@@ -68,7 +103,10 @@ const Firebase = () => {
             setSuccessMessage('');
         }
     };
-
+    
+    
+    
+    
     return (
         <div className="firebase-container">
             <h2 className="text-center">Connect Firebase</h2>

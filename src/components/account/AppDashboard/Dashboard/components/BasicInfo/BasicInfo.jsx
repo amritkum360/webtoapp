@@ -4,13 +4,17 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import './BasicInfo.css';
+import { useParams } from 'react-router-dom';
 
 const BasicInfo = () => {
+    const {id} = useParams()
+    console.log(id)
     const [formData, setFormData] = useState({
         websiteAddress: '',
-        appName: '',
+        appName: '', 
         appLogo: null,
     });
+    console.log("dashboard1")
 
     useEffect(() => {
         const fetchAppInfo = async () => {
@@ -52,36 +56,52 @@ const BasicInfo = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const formDataToSend = {
+            const formDataToSend = new FormData();
+            formDataToSend.append('file', formData.appLogo);
+            formDataToSend.append('upload_preset', 'qta1vcsh');
+    
+            const cloudinaryResponse = await fetch('https://api.cloudinary.com/v1_1/dcmrsdzvq/image/upload', {
+                method: 'POST',
+                body: formDataToSend,
+            });
+    
+            if (!cloudinaryResponse.ok) {
+                const cloudinaryData = await cloudinaryResponse.json();
+                console.error('Cloudinary error:', cloudinaryData);
+                throw new Error('Failed to upload image to Cloudinary');
+            }
+    
+            const cloudinaryData = await cloudinaryResponse.json();
+            const imageUrl = cloudinaryData.secure_url;
+            console.log(imageUrl)
+            const formDataToSendWithImageUrl = {
                 website: formData.websiteAddress,
                 appName: formData.appName,
-                appicon: formData.appLogo,
+                appicon: imageUrl,
             };
     
-            const formDataToSendString = JSON.stringify(formDataToSend);
-    
-            const response = await fetch('http://127.0.0.1:3000/appinfo/update', {
+            const response = await fetch(`http://127.0.0.1:3000/appinfo/update/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: formDataToSendString,
+                body: JSON.stringify(formDataToSendWithImageUrl),
             });
     
             if (response.ok) {
                 const data = await response.json();
                 console.log('Data updated successfully:', data);
-                setSuccessMessage('Data updated successfully!');
-                setErrorMessage('');
+                // Set success message here if needed
             } else {
                 throw new Error('Failed to update data');
             }
         } catch (error) {
             console.error('Error updating data:', error);
-            setErrorMessage('Error updating data. Please try again.');
-            setSuccessMessage('');
+            // Set error message here if needed
         }
     };
+    
+    
     
 
     return (

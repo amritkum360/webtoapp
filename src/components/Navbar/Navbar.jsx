@@ -6,7 +6,7 @@ export default function Navbar({ isAuthenticated }) {
     return (
         <div className="navbar">
             <Link to="/">
-                <img src="https://appilix.com/styles/images/logo.svg" alt="logo" className="logo" />
+                <img src="/headlogo.png" alt="logo" className="logo" style={{width:"200px"}}/>
             </Link>
             <div className="links">
                 {isAuthenticated ? (

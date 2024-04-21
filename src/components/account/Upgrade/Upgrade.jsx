@@ -20,6 +20,12 @@ export default function Upgrade() {
 
     // Modify paymenthandler to accept amount as a parameter
     const paymenthandler = async (amount) => {
+        if (amount === 0) {
+            navigate(`/app/dashboard/${id}`); // Navigate directly to the app dashboard if the amount is 0
+            return; // Return to prevent further execution of payment process
+        }
+
+        
         const currency = "INR";
         const receiptId = "qwsaq1";
 

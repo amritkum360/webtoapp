@@ -8,7 +8,7 @@ const MainDashboard = () => {
     const navigate = useNavigate()
     const { id } = useParams();
     const [appData, setAppData] = useState(null);
-
+    console.log("dashboard1")
     useEffect(() => {
         const fetchAppData = async () => {
             try {
@@ -33,23 +33,51 @@ const MainDashboard = () => {
                     {appData && (
                         <Card className="app-card">
                             <Card.Body className="d-flex align-items-center">
-    <div className="app-icon mr-md-4">
-        <Image className='app_dashboard' src={appData.appicon} alt="App Icon" fluid style={{ maxWidth: '150px', maxHeight: '150px' }} />
-    </div>
-    <div>
-        <div>
-        <div className="pro-tag">{appData.plan === "2000" || appData.plan === "1199" ? "Pro" : "Free"}</div>
-        {appData.plan !== "2000" && appData.plan !== "1199" && (
-            <button className='upgrade_btn' onClick={() => navigate(`/app/upgrade/${id}`)}>UPGRADE</button>
-        )}</div>
-        <Card.Title>{appData.appName}</Card.Title>
-        <Card.Text>
-            <strong>Website:</strong> {appData.website}<br />
-            <strong>Created At:</strong> {new Date(appData.createdAt).toLocaleDateString()}
-        </Card.Text>
-    </div>
-</Card.Body>
+                                <div className="app-icon mr-md-4">
+                                    <Image className='app_dashboard' src={appData.appicon} alt="App Icon" fluid style={{ maxWidth: '150px', maxHeight: '150px' }} />
+                                </div>
+                                <div>
+                                    <div>
+                                        <div className="pro-tag">{appData.plan === "2000" || appData.plan === "1199" ? "Pro" : "Free"}</div>
+                                        {appData.plan !== "2000" && appData.plan !== "1199" && (
+                                            <button className='upgrade_btn' onClick={() => navigate(`/app/upgrade/${id}`)}>UPGRADE</button>
+                                        )}
+                                    </div>
+                                    <Card.Title>{appData.appName}</Card.Title>
+                                    <Card.Text>
+                                        <strong>Website:</strong> {appData.website}<br />
+                                        <strong>Created At:</strong> {new Date(appData.createdAt).toLocaleDateString()}
+                                    </Card.Text>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    )}
 
+                    {appData && (
+                        <Card className="app-card">
+                            <Card.Body className="d-flex align-items-center">
+                                {/* <div className="app-icon mr-md-4">
+                                    <Image className='app_dashboard' src={appData.appicon} alt="App Icon" fluid style={{ maxWidth: '150px', maxHeight: '150px' }} />
+                                </div> */}
+                                <div>
+                                    {/* <div>
+                                        <div className="pro-tag">{appData.plan === "2000" || appData.plan === "1199" ? "Pro" : "Free"}</div>
+                                        {appData.plan !== "2000" && appData.plan !== "1199" && (
+                                            <button className='upgrade_btn' onClick={() => navigate(`/app/upgrade/${id}`)}>UPGRADE</button>
+                                        )}
+                                    </div> */}
+                                    <Card.Title>How To Convert Website To App?</Card.Title>
+                                    <Card.Text>
+                                        <hr />
+                                       <p>Firstly, You will have to choose a name for your app and the website you wanted to be converted.</p><hr />
+                                      <p>Now, Upload the logos in the Basic Info. Also, you can update the name of the App and Website URL.</p><hr />
+                                      <p>If, You want some design and animation in the Application the you can go to Splash Screen section and make changes Accordingly.</p>
+                                        
+                                        <p>If, you have taken paid plan then ou can also put Admob Ads to Earn Money. You can also inclues Notification System in your App.</p>
+                                        <p>At Last, you can build the App. After the build complete. You can download your App.</p>
+                                         </Card.Text>
+                                </div>
+                            </Card.Body>
                         </Card>
                     )}
                 </div>
