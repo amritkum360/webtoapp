@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Firebase.css'; // Add your custom CSS for styling here
+import { useParams } from 'react-router-dom';
 
 const Firebase = () => {
+    const {id }= useParams()
     const [formData, setFormData] = useState({
         firebaseConfigFile: null,
         fcmServerKey: '',
@@ -12,9 +14,11 @@ const Firebase = () => {
     useEffect(() => {
         const fetchFirebaseData = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:3000/app/firebase');
+                const response = await fetch(`http://127.0.0.1:3000/app/firebase/${id}`);
                 if (response.ok) {
                     const data = await response.json();
+                    console.log("firebase")
+                    console.log("firebase",data)
                     const { firebaseconf, fcmsecuritykey } = data;
                     setFormData({
                         firebaseConfigFile: null, // Set to null as file input value cannot be set programmatically
@@ -81,7 +85,7 @@ const Firebase = () => {
                 fcmsecuritykey: formData.fcmServerKey,
             };
     
-            const response = await fetch('http://127.0.0.1:3000/app/firebase', {
+            const response = await fetch(`http://127.0.0.1:3000/app/firebase/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

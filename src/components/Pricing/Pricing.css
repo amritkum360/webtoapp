@@ -4,7 +4,7 @@
     justify-content: center;
     gap: 20px;
     padding: 20px;
-    margin-top: 5%;
+    padding-top: 5%;
 }
 
 .pricing-box {
@@ -12,10 +12,11 @@
     border-radius: 10px;
     padding: 30px;
     text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 4px 10px rgba(253, 82, 207, 0.733);
     width: calc(33.33% - 40px); /* Adjust width for responsiveness */
     max-width: 300px; /* Maximum width for each box */
     margin-bottom: 20px;
+    border: 1px solid rgb(212, 212, 212);
 }
 
 .pricing-box h2 {
@@ -82,6 +83,17 @@ ul li {
     display: inline-block;
     width: 100%;
     text-align: left;
+}
+
+.pricingheading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    font-family: cursive;
+    text-decoration-line: underline;
+    color: lightseagreen;
+
 }
 
 /* Media queries for responsiveness */

@@ -80,6 +80,8 @@ export default function NewApp() {
         <div className="newapp-container">
             <div className="newapp_form_cnt">
                 <div className="newapp-form">
+                <img src="/headlogo.png" alt="" className='form_logos'/>
+
                     <h1 className="form-title">Create New App</h1>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formWebsite">

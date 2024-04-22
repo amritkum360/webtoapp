@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import './SplashScreen.css'; // Add your custom CSS for styling here
 import { useParams } from 'react-router-dom';
+import { SketchPicker } from 'react-color';
 
 const SplashScreen = () => {
     const { id } = useParams();
@@ -17,6 +18,8 @@ const SplashScreen = () => {
         statusBarIconColor: '',
         appId: id
     });
+    const [showColorPicker, setShowColorPicker] = useState(false);
+    const colorPickerRef = useRef(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,6 +44,20 @@ const SplashScreen = () => {
         fetchData();
     }, [id]);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (colorPickerRef.current && !colorPickerRef.current.contains(event.target)) {
+                setShowColorPicker(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -49,14 +66,17 @@ const SplashScreen = () => {
         });
     };
 
+    const toggleColorPicker = () => {
+        setShowColorPicker(!showColorPicker);
+    };
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         setFormData({
             ...formData,
             splashScreenLogo: file,
-        })}
-
- 
+        });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -64,7 +84,7 @@ const SplashScreen = () => {
             // Upload file to Cloudinary
             const formDataToSend = new FormData();
             formDataToSend.append('file', formData.splashScreenLogo);
-            formDataToSend.append('upload_preset', 'qta1vcsh'); // Replace 'your_upload_preset' with your Cloudinary upload preset
+            formDataToSend.append('upload_preset', 'qta1vcsh');
 
             const cloudinaryResponse = await fetch('https://api.cloudinary.com/v1_1/dcmrsdzvq/image/upload', {
                 method: 'POST',
@@ -110,7 +130,7 @@ const SplashScreen = () => {
             <h2 className="text-center">Splash Screen Customization</h2>
             <p className="text-center mb-4">Customize your app's splash screen settings</p>
             <Form onSubmit={handleSubmit} className="firebase-form">
-                <div className="form-group-section" style={{marginBottom:"20px"}}>
+                <div className="form-group-section" style={{ marginBottom: "20px" }}>
                     <label className="form-label">Splash Screen Logo</label>
                     <Form.Group as={Row} controlId="formSplashScreenLogo">
                         <Col sm="9">
@@ -119,7 +139,7 @@ const SplashScreen = () => {
                     </Form.Group>
                 </div>
 
-                <div className="form-group-section" style={{marginBottom:"20px"}}>
+                <div className="form-group-section" style={{ marginBottom: "20px" }}>
                     <label className="form-label">Splash Screen Timeout (seconds)</label>
                     <Form.Group as={Row} controlId="formSplashScreenTimeout">
                         <Col sm="9">
@@ -128,7 +148,7 @@ const SplashScreen = () => {
                     </Form.Group>
                 </div>
 
-                <div className="form-group-section" style={{marginBottom:"20px"}}>
+                <div className="form-group-section" style={{ marginBottom: "20px" }}>
                     <label className="form-label">Customize Status Bar</label>
                     <Form.Group as={Row} controlId="formCustomizeStatusBar">
                         <Col sm="9">
@@ -142,16 +162,39 @@ const SplashScreen = () => {
 
                 {formData.customizeStatusBar === 'yes' && (
                     <>
-                        <div className="form-group-section" style={{marginBottom:"20px"}}>
+                        <div className="form-group-section" style={{ marginBottom: "20px" }}>
                             <label className="form-label">Status Bar Background Color</label>
                             <Form.Group as={Row} controlId="formStatusBarBackgroundColor">
                                 <Col sm="9">
-                                    <Form.Control type="text" placeholder="Enter background color" name="statusBarBackgroundColor" value={formData.statusBarBackgroundColor} onChange={handleInputChange} />
+                                    <div style={{ position: "relative" }}>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Select background color"
+                                            name="statusBarBackgroundColor"
+                                            value={formData.statusBarBackgroundColor}
+                                            readOnly // Make the input field read-only
+                                            onFocus={toggleColorPicker} // Show color picker on focus
+                                            ref={colorPickerRef} // Add ref to color picker input field
+                                        />
+                                        {showColorPicker && (
+                                            <div style={{ position: "absolute", zIndex: 1 }}>
+                                                <SketchPicker
+                                                    color={formData.statusBarBackgroundColor}
+                                                    onChange={(color) =>
+                                                        setFormData({
+                                                            ...formData,
+                                                            statusBarBackgroundColor: color.hex, // Set the selected color
+                                                        })
+                                                    }
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
                                 </Col>
                             </Form.Group>
                         </div>
 
-                        <div className="form-group-section" style={{marginBottom:"20px"}}>
+                        <div className="form-group-section" style={{ marginBottom: "20px" }}>
                             <label className="form-label">Status Bar Icon Color</label>
                             <Form.Group as={Row} controlId="formStatusBarIconColor">
                                 <Col sm="9">

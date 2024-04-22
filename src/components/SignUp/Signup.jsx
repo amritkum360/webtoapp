@@ -52,6 +52,7 @@ export default function Signup() {
         <Container fluid className="signup-container signup_form_cnt">
             <Row className="justify-content-center">
                 <Col md={6} className="signup-form">
+                <img src="/headlogo.png" alt="" className='form_logos'/>
                     <h1 className="form-title">Sign Up</h1>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formName">

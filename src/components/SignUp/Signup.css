@@ -51,3 +51,7 @@
     display: flex;
     justify-content: center;
 }
+
+.form_logos{
+    width: 150px;
+}

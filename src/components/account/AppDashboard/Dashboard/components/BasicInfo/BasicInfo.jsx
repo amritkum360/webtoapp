@@ -103,7 +103,7 @@ const BasicInfo = () => {
     
     
     
-
+console.log("this is basic")
     return (
         <div className="basic-info-container">
             <h2>App Information</h2>

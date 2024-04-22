@@ -9,6 +9,7 @@ import MyApps from "./components/account/myapps/myapps";
 import NewApp from "./components/account/newapp/newapp";
 import Home from "./components/home/home";
 import Upgrade from "./components/account/Upgrade/Upgrade";
+import NeedPaidPlan from "./components/account/AppDashboard/Dashboard/components/needpaidplan/needpaidplan";
 
 export default function App() {
   const isAuthenticated = localStorage.getItem("token") !== null; // Check if a token exists in localStorage
@@ -69,6 +70,15 @@ export default function App() {
         <>
           <Navbar isAuthenticated={isAuthenticated} />
           <AppDashboard />
+        </>
+      ),
+    },
+    {
+      path: "/needpaidplan",
+      element: (
+        <>
+          <Navbar isAuthenticated={isAuthenticated} />
+          <NeedPaidPlan />
         </>
       ),
     },

@@ -42,6 +42,9 @@ export default function Login() {
                 localStorage.setItem('token', data.token); // Save the token to localStorage
                 // Redirect to the homepage or any desired route upon successful login
                 navigate('/');
+
+                
+        window.location.reload();
             } else {
                 console.error('Token not received from server');
                 // Handle the case where the server does not provide a token
@@ -58,6 +61,8 @@ export default function Login() {
         <Container fluid className="login-container login_form_cnt">
             <Row className="justify-content-center">
                 <Col md={6} className="login-form">
+                <img src="/headlogo.png" alt="" className='form_logos'/>
+
                     <h1 className="form-title">Log In</h1>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formEmail">

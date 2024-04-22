@@ -33,9 +33,13 @@ const MainDashboard = () => {
                     {appData && (
                         <Card className="app-card">
                             <Card.Body className="d-flex align-items-center">
-                                <div className="app-icon mr-md-4">
-                                    <Image className='app_dashboard' src={appData.appicon} alt="App Icon" fluid style={{ maxWidth: '150px', maxHeight: '150px' }} />
-                                </div>
+                            <div className="app-icon mr-md-4">
+            {appData.appicon ? (
+                <Image className='app_dashboard' src={appData.appicon} alt="App Icon" fluid style={{ maxWidth: '150px', maxHeight: '150px' }} />
+            ) : (
+                <Image className='app_dashboard' src={'/webicon.png'} alt="Default App Icon" fluid style={{ maxWidth: '150px', maxHeight: '150px' }} />
+            )}
+        </div>
                                 <div>
                                     <div>
                                         <div className="pro-tag">{appData.plan === "2000" || appData.plan === "1199" ? "Pro" : "Free"}</div>
@@ -54,7 +58,7 @@ const MainDashboard = () => {
                     )}
 
                     {appData && (
-                        <Card className="app-card">
+                        <Card className="app-card" style={{marginTop:'40px'}}>
                             <Card.Body className="d-flex align-items-center">
                                 {/* <div className="app-icon mr-md-4">
                                     <Image className='app_dashboard' src={appData.appicon} alt="App Icon" fluid style={{ maxWidth: '150px', maxHeight: '150px' }} />

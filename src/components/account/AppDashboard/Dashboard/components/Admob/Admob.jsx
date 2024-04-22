@@ -14,10 +14,12 @@ const Admob = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:3000/app/admobs?appid=${id}`);
+                const response = await fetch(`http://127.0.0.1:3000/app/admobs/${id}`);
                 if (response.ok) {
                     const data = await response.json();
-                    const { applicationid, bannerid } = data;
+                    console.log(data)
+                    const applicationid = data.applicationid;
+                    const bannerid = data.bannerid;
                     setFormData({
                         admobAppId: applicationid || '', // If data is null, set to empty string
                         bannerAdUnitId: bannerid || '', // If data is null, set to empty string
@@ -27,10 +29,10 @@ const Admob = () => {
                 console.log(error);
             }
         };
-
+    
         fetchData(); // Call the fetchData function on component mount
     }, [id]); // Include id in the dependency array to fetch data when id changes
-
+    
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -42,7 +44,7 @@ const Admob = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await fetch('http://127.0.0.1:3000/app/admobs', {
+            await fetch(`http://127.0.0.1:3000/app/admobs`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
