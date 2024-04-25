@@ -27,7 +27,7 @@ const AppDashboard = () => {
         fetchData();
     }, [id]); // Fetch data when `id` changes
 
-    console.log(responseData)
+    console.log(responseData);
 
     return (
         <div className="dashboard-container">
@@ -39,9 +39,9 @@ const AppDashboard = () => {
                     <div className="dashboard-content">
                         {activeItem === 'Dashboard' && <MainDashboard />}
                         {activeItem === 'Basic Info' && <BasicInfo />}
-                        {activeItem === 'Splash Screen' && <SplashScreen />}
-                        {activeItem === 'Admob' && <Admob />}
-                        {activeItem === 'Firebase' && <Firebase />}
+                        {activeItem === 'Splash Screen' && <SplashScreen/>}
+                        {activeItem === 'Admob' && <Admob plan={responseData?.plan} />}
+                        {activeItem === 'Firebase' && <Firebase plan={responseData?.plan} />}
                         {activeItem === 'Build And Download' && <Build />}
                     </div>
                 </div>

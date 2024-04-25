@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Admob.css'; // Add your custom CSS for styling here
 import { useParams } from 'react-router-dom';
+import NeedPaidPlan from '../needpaidplan/needpaidplan';
 
-const Admob = () => {
+const Admob = ({ plan }) => { // Receive plan as a prop
     const [formData, setFormData] = useState({
         admobAppId: '',
         bannerAdUnitId: '',
@@ -12,6 +13,8 @@ const Admob = () => {
     const { id } = useParams(); // Access the id parameter from the URL
 
     useEffect(() => {
+        console.log('Plan:', plan); // Log the plan
+
         const fetchData = async () => {
             try {
                 const response = await fetch(`http://127.0.0.1:3000/app/admobs/${id}`);
@@ -65,33 +68,39 @@ const Admob = () => {
     };
 
     return (
-        <div className="admob-container">
-            <h2 className="text-center mb-1">Connect Admob</h2>
-            <p className="text-center mb-4">Put your advertisement Info</p>
-            {successMessage && (
-                <div className="alert alert-success" role="alert">
-                    {successMessage}
-                </div>
-            )}
-            {errorMessage && (
-                <div className="alert alert-danger" role="alert">
-                    {errorMessage}
-                </div>
-            )}
-            <form onSubmit={handleSubmit} className="admob-form">
-                <div className="form-group">
-                    <label htmlFor="admobAppId">Admob Application Id</label>
-                    <input type="text" id="admobAppId" name="admobAppId" className="form-control" value={formData.admobAppId} onChange={handleInputChange} />
-                </div>
+        <>
+        {plan === "0" ? (
+            <NeedPaidPlan />
+        ) : (
+            <div className="admob-container">
+                <h2 className="text-center mb-1">Connect Admob</h2>
+                <p className="text-center mb-4">Put your advertisement Info</p>
+                {successMessage && (
+                    <div className="alert alert-success" role="alert">
+                        {successMessage}
+                    </div>
+                )}
+                {errorMessage && (
+                    <div className="alert alert-danger" role="alert">
+                        {errorMessage}
+                    </div>
+                )}
+                <form onSubmit={handleSubmit} className="admob-form">
+                    <div className="form-group">
+                        <label htmlFor="admobAppId">Admob Application Id</label>
+                        <input type="text" id="admobAppId" name="admobAppId" className="form-control" value={formData.admobAppId} onChange={handleInputChange} />
+                    </div>
 
-                <div className="form-group">
-                    <label htmlFor="bannerAdUnitId">Banner Ad Unit Id</label>
-                    <input type="text" id="bannerAdUnitId" name="bannerAdUnitId" className="form-control" value={formData.bannerAdUnitId} onChange={handleInputChange} />
-                </div>
+                    <div className="form-group">
+                        <label htmlFor="bannerAdUnitId">Banner Ad Unit Id</label>
+                        <input type="text" id="bannerAdUnitId" name="bannerAdUnitId" className="form-control" value={formData.bannerAdUnitId} onChange={handleInputChange} />
+                    </div>
 
-                <button type="submit" className="btn btn-primary mt-4">Save Changes</button>
-            </form>
-        </div>
+                    <button type="submit" className="btn btn-primary btn-primary1 mt-4">Save Changes</button>
+                </form>
+            </div>
+        )}
+        </>
     );
 };
 

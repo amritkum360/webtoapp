@@ -14,12 +14,14 @@ export default function NewApp() {
         user: userid
     });
 
+    console.log(userid)
+
     useEffect(() => {
         const token = localStorage.getItem('token'); // Assuming you have saved the token in localStorage
         if (token) {
             const decodedToken = jwtDecode(token);
             console.log(decodedToken);
-            const Userid = decodedToken.Userid;
+            const Userid = decodedToken.id;
             setUserid(Userid);
             setFormData(prevData => ({
                 ...prevData,

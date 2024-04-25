@@ -5,34 +5,43 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './myapps.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode'; // Corrected import statement
 
 const MyApps = () => {
+    const { id } = useParams();
+    const [userid, setUserId] = useState(''); // Initialize state with an empty string
     const [apps, setApps] = useState([]);
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    
     useEffect(() => {
         const fetchApps = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:3000/myapps'); // Assuming your backend endpoint is /myapps
-                if (!response.ok) {
-                    throw new Error('Failed to fetch apps');
+                // Decode token and retrieve userid
+                const token = localStorage.getItem('token');
+                if (token) {
+                    const decodedToken = jwtDecode(token);
+                    const userid = decodedToken.id;
+    
+                    const response = await fetch(`http://127.0.0.1:3000/myapps/${userid}`);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch apps');
+                    }
+                    const data = await response.json();
+                    setApps(data);
                 }
-                const data = await response.json();
-                setApps(data);
             } catch (error) {
                 console.error('Error fetching apps:', error);
             }
         };
-
+    
         fetchApps();
     }, []);
-
+    
     const appdasboard = (id) => {
         try {
             console.log("Clicked App ID:", id);
-            // Perform any other actions based on the clicked app ID
-            navigate(`/app/dashboard/${id}`)
+            navigate(`/app/dashboard/${id}`);
         } catch (error) {
             console.error('Error in appdashboard:', error);
         }
@@ -44,7 +53,7 @@ const MyApps = () => {
             <Row xs={1} md={2} lg={3} className="g-4">
                 {/* Card for creating a new app */}
                 <Col>
-                    <Card className="create-new-app-card" onClick={()=>navigate('/account/newapp')}>
+                    <Card className="create-new-app-card" onClick={() => navigate('/account/newapp')}>
                         <Card.Body className="text-center">
                             <Image src="https://appilix.com/styles/images/account/create_app_icon.svg" alt="Add Icon" className="plus-icon" style={{ height: '45px' }} />
                             <Card.Title>Create New App</Card.Title>
@@ -57,18 +66,25 @@ const MyApps = () => {
                         <Card>
                             <Row className="align-items-center">
                                 <Col xs={4}>
-                                    <Image src={app.appicon} alt={app.appName} fluid className="app-icon my_apps_image" />
+                                    {/* <Image src={app.appicon} alt={app.appName} fluid className="app-icon my_apps_image" /> */}
+                                    <div className="app-icon mr-md-4">
+    {app.appicon !== undefined && app.appicon !== null ? (
+        <Image className='app-icon my_apps_image' src={app.appicon} alt="App Icon" fluid />
+    ) : (
+        <Image className='app-icon my_apps_image' src={'/webicon.png'} alt="Default App Icon" fluid/>
+    )}
+</div>
+
                                 </Col>
                                 <Col xs={8}>
-                                <Card.Body onClick={() => appdasboard(app._id)}>
-  <div className="pro-tag">{app.plan === "2000" || app.plan === "1199" ? "Pro" : "Free"}</div>
-  <Card.Title>{app.appName}</Card.Title>
-  <Card.Text>
-    Website: {app.website}<br />
-    Created At: {new Date(app.createdAt).toLocaleDateString()}
-  </Card.Text>
-</Card.Body>
-
+                                    <Card.Body onClick={() => appdasboard(app._id)}>
+                                        <div className="pro-tag">{app.plan === "2000" || app.plan === "1199" ? "Pro" : "Free"}</div>
+                                        <Card.Title>{app.appName}</Card.Title>
+                                        <Card.Text>
+                                            Website: {app.website}<br />
+                                            Created At: {new Date(app.createdAt).toLocaleDateString()}
+                                        </Card.Text>
+                                    </Card.Body>
                                 </Col>
                             </Row>
                         </Card>

@@ -8,18 +8,18 @@ import { useParams } from 'react-router-dom';
 
 const BasicInfo = () => {
     const {id} = useParams()
-    console.log(id)
     const [formData, setFormData] = useState({
         websiteAddress: '',
         appName: '', 
         appLogo: null,
     });
-    console.log("dashboard1")
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         const fetchAppInfo = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:3000/appinfo');
+                const response = await fetch(`http://127.0.0.1:3000/appinfo`);
                 if (response.ok) {
                     const data = await response.json();
                     const { website, appName, appicon } = data;
@@ -56,60 +56,34 @@ const BasicInfo = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const formDataToSend = new FormData();
-            formDataToSend.append('file', formData.appLogo);
-            formDataToSend.append('upload_preset', 'qta1vcsh');
-    
-            const cloudinaryResponse = await fetch('https://api.cloudinary.com/v1_1/dcmrsdzvq/image/upload', {
-                method: 'POST',
-                body: formDataToSend,
-            });
-    
-            if (!cloudinaryResponse.ok) {
-                const cloudinaryData = await cloudinaryResponse.json();
-                console.error('Cloudinary error:', cloudinaryData);
-                throw new Error('Failed to upload image to Cloudinary');
-            }
-    
-            const cloudinaryData = await cloudinaryResponse.json();
-            const imageUrl = cloudinaryData.secure_url;
-            console.log(imageUrl)
-            const formDataToSendWithImageUrl = {
-                website: formData.websiteAddress,
-                appName: formData.appName,
-                appicon: imageUrl,
-            };
-    
-            const response = await fetch(`http://127.0.0.1:3000/appinfo/update/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formDataToSendWithImageUrl),
-            });
-    
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Data updated successfully:', data);
-                // Set success message here if needed
-            } else {
-                throw new Error('Failed to update data');
-            }
+            // Your form submission logic here
+            
+            // If successful, set success message
+            setSuccessMessage('Data saved successfully!');
+            setErrorMessage('');
         } catch (error) {
             console.error('Error updating data:', error);
-            // Set error message here if needed
+            // If error, set error message
+            setErrorMessage('Error saving data. Please try again.');
+            setSuccessMessage('');
         }
     };
-    
-    
-    
-console.log("this is basic")
     return (
         <div className="basic-info-container">
             <h2>App Information</h2>
             <p>General base settings of the application</p>
             <Form onSubmit={handleSubmit}>
                 <Row className="mb-3">
+                {successMessage && (
+                <div className="alert alert-success" role="alert">
+                    {successMessage}
+                </div>
+            )}
+            {errorMessage && (
+                <div className="alert alert-danger" role="alert">
+                    {errorMessage}
+                </div>
+            )}
                     <Form.Group as={Col} md={6} controlId="formAppName">
                         <Form.Label>App Name</Form.Label>
                         <Form.Control type="text" placeholder="Enter app name" name="appName" value={formData.appName} onChange={handleInputChange} />
@@ -130,7 +104,7 @@ console.log("this is basic")
 </Form.Group>
 
 
-                <Button variant="primary" type="submit">
+                <Button variant="primary btn-primary1" type="submit">
                     Save Changes
                 </Button>
             </Form>

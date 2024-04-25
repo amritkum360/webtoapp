@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import './Signup.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: ''
     });
+    const [error, setError] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -43,8 +46,10 @@ export default function Signup() {
             setTimeout(() => {
                 localStorage.removeItem('token'); // Remove token after 1 hour
             }, 3600000); // 1 hour in milliseconds
+            navigate('/')
         } catch (error) {
             console.error('Error submitting form:', error);
+            setError('Email already exists');
         }
     };
 
@@ -54,6 +59,7 @@ export default function Signup() {
                 <Col md={6} className="signup-form">
                 <img src="/headlogo.png" alt="" className='form_logos'/>
                     <h1 className="form-title">Sign Up</h1>
+                    {error && <div className="alert alert-danger">{error}</div>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formName">
                             <Form.Label>Name</Form.Label>

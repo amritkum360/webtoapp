@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Firebase.css'; // Add your custom CSS for styling here
 import { useParams } from 'react-router-dom';
+import NeedPaidPlan from '../needpaidplan/needpaidplan';
 
-const Firebase = () => {
+const Firebase = ({ plan }) => {
     const {id }= useParams()
     const [formData, setFormData] = useState({
         firebaseConfigFile: null,
@@ -112,6 +113,10 @@ const Firebase = () => {
     
     
     return (
+        <>
+        {plan === "0" ? (
+            <NeedPaidPlan />
+        ) : (
         <div className="firebase-container">
             <h2 className="text-center">Connect Firebase</h2>
             <p className="text-center mb-2">Put Firebase detail in the form</p>
@@ -136,9 +141,10 @@ const Firebase = () => {
                     <textarea id="fcmServerKey" name="fcmServerKey" rows="4" className="form-control" value={formData.fcmServerKey} onChange={handleInputChange}></textarea>
                 </div>
 
-                <button type="submit" className="btn btn-primary mt-4">Save Changes</button>
+                <button type="submit" className="btn btn-primary btn-primary1 mt-4">Save Changes</button>
             </form>
-        </div>
+        </div>) }
+        </>
     );
 };
 
