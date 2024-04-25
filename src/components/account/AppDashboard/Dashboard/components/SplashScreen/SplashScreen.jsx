@@ -24,7 +24,7 @@ const SplashScreen = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:3000/api/splashscreen/${id}`);
+                const response = await fetch(`https://webtoapp-back-1.onrender.com/api/splashscreen/${id}`);
                 if (response.ok) {
                     const data = await response.json();
                     if (data) {
@@ -104,7 +104,7 @@ const SplashScreen = () => {
                 splashScreenLogo: splashScreenLogoUrl,
             };
 
-            const response = await fetch('http://127.0.0.1:3000/api/splashscreen', {
+            const response = await fetch('https://webtoapp-back-1.onrender.com/api/splashscreen', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

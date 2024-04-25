@@ -52,7 +52,7 @@ export default function NewApp() {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://127.0.0.1:3000/addnewapp', {
+            const response = await fetch('https://webtoapp-back-1.onrender.com/addnewapp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

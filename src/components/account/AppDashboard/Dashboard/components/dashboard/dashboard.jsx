@@ -12,7 +12,7 @@ const MainDashboard = () => {
     useEffect(() => {
         const fetchAppData = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:3000/appdashboard/${id}`); // Assuming your backend endpoint is /appdashboard/:appid
+                const response = await fetch(`https://webtoapp-back-1.onrender.com/appdashboard/${id}`); // Assuming your backend endpoint is /appdashboard/:appid
                 if (!response.ok) {
                     throw new Error('Failed to fetch app data');
                 }

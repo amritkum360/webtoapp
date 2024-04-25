@@ -16,7 +16,7 @@ const AppDashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:3000/appdashboardagri/${id}`);
+                const response = await fetch(`https://webtoapp-back-1.onrender.com/appdashboardagri/${id}`);
                 const data = await response.json();
                 setResponseData(data);
             } catch (error) {

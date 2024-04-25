@@ -17,7 +17,7 @@ const Admob = ({ plan }) => { // Receive plan as a prop
 
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:3000/app/admobs/${id}`);
+                const response = await fetch(`https://webtoapp-back-1.onrender.com/app/admobs/${id}`);
                 if (response.ok) {
                     const data = await response.json();
                     console.log(data)
@@ -47,7 +47,7 @@ const Admob = ({ plan }) => { // Receive plan as a prop
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await fetch(`http://127.0.0.1:3000/app/admobs`, {
+            await fetch(`https://webtoapp-back-1.onrender.com/app/admobs`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

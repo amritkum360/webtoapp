@@ -19,7 +19,7 @@ const BasicInfo = () => {
     useEffect(() => {
         const fetchAppInfo = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:3000/appinfo`);
+                const response = await fetch(`https://webtoapp-back-1.onrender.com/appinfo`);
                 if (response.ok) {
                     const data = await response.json();
                     const { website, appName, appicon } = data;

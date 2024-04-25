@@ -15,7 +15,7 @@ const Firebase = ({ plan }) => {
     useEffect(() => {
         const fetchFirebaseData = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:3000/app/firebase/${id}`);
+                const response = await fetch(`https://webtoapp-back-1.onrender.com/app/firebase/${id}`);
                 if (response.ok) {
                     const data = await response.json();
                     console.log("firebase")
@@ -86,7 +86,7 @@ const Firebase = ({ plan }) => {
                 fcmsecuritykey: formData.fcmServerKey,
             };
     
-            const response = await fetch(`http://127.0.0.1:3000/app/firebase/${id}`, {
+            const response = await fetch(`https://webtoapp-back-1.onrender.com/app/firebase/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

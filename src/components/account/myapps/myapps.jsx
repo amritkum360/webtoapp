@@ -23,7 +23,7 @@ const MyApps = () => {
                     const decodedToken = jwtDecode(token);
                     const userid = decodedToken.id;
     
-                    const response = await fetch(`http://127.0.0.1:3000/myapps/${userid}`);
+                    const response = await fetch(`https://webtoapp-back-1.onrender.com/myapps/${userid}`);
                     if (!response.ok) {
                         throw new Error('Failed to fetch apps');
                     }

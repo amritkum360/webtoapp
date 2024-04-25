@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'; // Import Bootstrap Button componen
 const Build = () => {
     const handleClick = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:3000/changethedata', {
+            const response = await fetch('https://webtoapp-back-1.onrender.com/changethedata', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ const Build = () => {
 `
 
                 // Send a POST request to update the file content
-                const updateResponse = await fetch('http://127.0.0.1:3000/updatefile', {
+                const updateResponse = await fetch('https://webtoapp-back-1.onrender.com/updatefile', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -56,12 +56,12 @@ const Build = () => {
 
     const handleBuildAndDownload = async () => {
         try {
-          const buildResponse = await fetch('http://127.0.0.1:3000/build', {
+          const buildResponse = await fetch('https://webtoapp-back-1.onrender.com/build', {
             method: 'POST',
           });
     
           if (buildResponse.ok) {
-            const downloadResponse = await fetch('http://127.0.0.1:3000/download');
+            const downloadResponse = await fetch('https://webtoapp-back-1.onrender.com/download');
             const blob = await downloadResponse.blob();
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
