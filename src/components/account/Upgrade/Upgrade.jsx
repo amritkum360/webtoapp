@@ -29,7 +29,7 @@ export default function Upgrade() {
         const currency = "INR";
         const receiptId = "qwsaq1";
 
-        const response = await fetch("http://localhost:4000/order", {
+        const response = await fetch("https://rayzorpay-backend.onrender.com/order", {
             method: "post",
             body: JSON.stringify({
                 amount,
@@ -44,10 +44,10 @@ export default function Upgrade() {
         console.log(order);
 
         var options = {
-            key: "rzp_test_MFJhFPo2B6EehL", // Enter the Key ID generated from the Dashboard
+            key: "rzp_test_MFJhFPo2B6EehL", 
             amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
             currency,
-            name: "WebApproxy", //your business name
+            name: "WebApproxy", 
             description: "Test Transaction",
             image: "https://example.com/your_logo",
             order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
@@ -59,7 +59,7 @@ export default function Upgrade() {
                     ...response,
                 };
 
-                const validateRes = await fetch("http://localhost:4000/order/validate", {
+                const validateRes = await fetch("https://rayzorpay-backend.onrender.com/order/validate", {
                     method: "post",
                     body: JSON.stringify(body),
                     headers: {
@@ -78,7 +78,7 @@ export default function Upgrade() {
                     };
 
                     // Save payment data to backend
-                    const savePaymentResponse = await fetch("http://localhost:3000/payment/detailsave", {
+                    const savePaymentResponse = await fetch("https://rayzorpay-backend.onrender.com/payment/detailsave", {
                         method: "post",
                         body: JSON.stringify(paymentData),
                         headers: {
@@ -127,7 +127,7 @@ export default function Upgrade() {
 
     return (
         <>
-            {/* <Navbar /> */}
+            
             <div className="pricing-container">
                 <div className="pricing-box">
                     <h2>Free</h2>

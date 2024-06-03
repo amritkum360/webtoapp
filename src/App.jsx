@@ -10,6 +10,13 @@ import NewApp from "./components/account/newapp/newapp";
 import Home from "./components/home/home";
 import Upgrade from "./components/account/Upgrade/Upgrade";
 import NeedPaidPlan from "./components/account/AppDashboard/Dashboard/components/needpaidplan/needpaidplan";
+import LoadingBar from "./components/LoadingBar/LoadingBar";
+import ContactUs from "./components/pages/contactus";
+import AboutUs from "./components/pages/AboutUs";
+import CancellationPolicy from "./components/pages/Cancelation";
+import PrivacyPolicy from "./components/pages/PrivacyPolicy";
+import RefundPolicy from "./components/pages/RefundPolicy";
+import TermsAndConditions from "./components/pages/Termsandconditions";
 
 export default function App() {
   const isAuthenticated = localStorage.getItem("token") !== null; // Check if a token exists in localStorage
@@ -88,6 +95,59 @@ export default function App() {
         <>
           <Navbar isAuthenticated={isAuthenticated} />
           <Upgrade />
+        </>
+      ),
+    },
+    {
+      path: "/loading",
+      element: (
+        <>
+          <Navbar/>
+          <LoadingBar />
+        </>
+      ),
+    },
+    {
+      path: "/contact",
+      element: (
+        <>
+          <Navbar/>
+          <ContactUs />
+        </>
+      ),},
+      {path: "/about",
+      element: (
+        <>
+          <Navbar/>
+          <AboutUs />
+        </>
+      ),},
+      {path: "/cancelation",
+      element: (
+        <>
+          <Navbar/>
+          <CancellationPolicy />
+        </>
+      ),},
+      {path: "/privacypolicy",
+      element: (
+        <>
+          <Navbar/>
+          <PrivacyPolicy />
+        </>
+      ),},
+      {path: "/refundpolicy",
+      element: (
+        <>
+          <Navbar/>
+          <RefundPolicy />
+        </>
+      ),},
+     { path: "/termsandconditions",
+      element: (
+        <>
+          <Navbar/>
+          <TermsAndConditions />
         </>
       ),
     },
