@@ -8,17 +8,17 @@ const ContactUs = () => {
       <div style={styles.contactDetails}>
         <p style={styles.label}><strong>Address:</strong></p>
         <p style={styles.info}>
-          123 Business St., Tech City, <br />
-          XYZ District, ABC State, <br />
-          Pin Code: 123456
+          House NO-5, Chakiya, Post-Mairwa <br />
+          Siwan District, BIHAR, <br />
+          Pin Code: 841239
         </p>
 
         <p style={styles.label}><strong>Mobile Number:</strong></p>
-        <p style={styles.info}>+91 9876543210</p>
+        <p style={styles.info}>+91 7667267787</p>
 
         <p style={styles.label}><strong>Email:</strong></p>
         <p style={styles.info}>
-          contact@yourbusiness.com
+          amritkum360@gmail.com
         </p>
       </div>
     </div>
