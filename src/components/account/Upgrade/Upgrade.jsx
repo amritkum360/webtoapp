@@ -161,7 +161,7 @@ export default function Upgrade() {
                         <li><span className="check-icon">✓</span> Play Store Releasable</li>
                     </ul>
                     {/* Pass the desired amount to paymenthandler */}
-                    <button className="get-started-btn" onClick={() => paymenthandler(11)}>Get Started</button>
+                    <button className="get-started-btn" onClick={() => paymenthandler(1000)}>Get Started</button>
                 </div>
                 <div className="pricing-box popular">
                     <h2>Lifetime</h2>
