@@ -44,7 +44,7 @@ export default function Upgrade() {
         console.log(order);
 
         var options = {
-            key: "rzp_test_MFJhFPo2B6EehL", 
+            key: "rzp_live_989PQ7Ffj0QKwf", 
             amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
             currency,
             name: "WebApproxy", 
