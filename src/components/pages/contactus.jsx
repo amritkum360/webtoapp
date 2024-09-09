@@ -6,6 +6,10 @@ const ContactUs = () => {
       <h2 style={styles.header}>Contact Us</h2>
 
       <div style={styles.contactDetails}>
+        <p style={styles.label}><strong>Comany Name</strong></p>
+        <p style={styles.info}>
+          Amrit Kumar
+        </p>
         <p style={styles.label}><strong>Address:</strong></p>
         <p style={styles.info}>
           House NO-5, Chakiya, Post-Mairwa <br />
